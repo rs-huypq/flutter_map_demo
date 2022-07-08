@@ -1,0 +1,14 @@
+{
+  // This is build configuration for VS Code IDE.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug-Development",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+    }
+  ]
+}
