@@ -76,7 +76,9 @@ class MapViewStateNotifier extends StateNotifier<MapViewState>
   }
 
   Future<bool> getInfoLocationSelected(
-      TapPosition tapPosition, LatLng latlng) async {
+    TapPosition tapPosition,
+    LatLng latlng,
+  ) async {
     final listLatLng = state.listLatLng;
 
     if (listLatLng.isNotEmpty) {
@@ -84,7 +86,9 @@ class MapViewStateNotifier extends StateNotifier<MapViewState>
       return false;
     }
     final places = await geocoding.placemarkFromCoordinates(
-        latlng.latitude, latlng.longitude);
+      latlng.latitude,
+      latlng.longitude,
+    );
     final placeInfo = PlaceInfo(
       city: places.first.administrativeArea,
       district: places.first.subAdministrativeArea,
@@ -108,7 +112,7 @@ class MapViewStateNotifier extends StateNotifier<MapViewState>
     try {
       var moved = mapController.move(
         LatLng(currentLocation.latitude!, currentLocation.longitude!),
-        18,
+        14,
       );
 
       if (moved) {

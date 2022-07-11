@@ -18,10 +18,16 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$MapViewStateTearOff {
   const _$MapViewStateTearOff();
 
-  _MapViewState call({String? serviceError, LocationData? currentLocation}) {
+  _MapViewState call(
+      {String? serviceError,
+      LocationData? currentLocation,
+      PlaceInfo? placeInfoSelected,
+      List<LatLng> listLatLng = const <LatLng>[]}) {
     return _MapViewState(
       serviceError: serviceError,
       currentLocation: currentLocation,
+      placeInfoSelected: placeInfoSelected,
+      listLatLng: listLatLng,
     );
   }
 }
@@ -33,6 +39,8 @@ const $MapViewState = _$MapViewStateTearOff();
 mixin _$MapViewState {
   String? get serviceError => throw _privateConstructorUsedError;
   LocationData? get currentLocation => throw _privateConstructorUsedError;
+  PlaceInfo? get placeInfoSelected => throw _privateConstructorUsedError;
+  List<LatLng> get listLatLng => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapViewStateCopyWith<MapViewState> get copyWith =>
@@ -44,7 +52,11 @@ abstract class $MapViewStateCopyWith<$Res> {
   factory $MapViewStateCopyWith(
           MapViewState value, $Res Function(MapViewState) then) =
       _$MapViewStateCopyWithImpl<$Res>;
-  $Res call({String? serviceError, LocationData? currentLocation});
+  $Res call(
+      {String? serviceError,
+      LocationData? currentLocation,
+      PlaceInfo? placeInfoSelected,
+      List<LatLng> listLatLng});
 }
 
 /// @nodoc
@@ -59,6 +71,8 @@ class _$MapViewStateCopyWithImpl<$Res> implements $MapViewStateCopyWith<$Res> {
   $Res call({
     Object? serviceError = freezed,
     Object? currentLocation = freezed,
+    Object? placeInfoSelected = freezed,
+    Object? listLatLng = freezed,
   }) {
     return _then(_value.copyWith(
       serviceError: serviceError == freezed
@@ -69,6 +83,14 @@ class _$MapViewStateCopyWithImpl<$Res> implements $MapViewStateCopyWith<$Res> {
           ? _value.currentLocation
           : currentLocation // ignore: cast_nullable_to_non_nullable
               as LocationData?,
+      placeInfoSelected: placeInfoSelected == freezed
+          ? _value.placeInfoSelected
+          : placeInfoSelected // ignore: cast_nullable_to_non_nullable
+              as PlaceInfo?,
+      listLatLng: listLatLng == freezed
+          ? _value.listLatLng
+          : listLatLng // ignore: cast_nullable_to_non_nullable
+              as List<LatLng>,
     ));
   }
 }
@@ -80,7 +102,11 @@ abstract class _$MapViewStateCopyWith<$Res>
           _MapViewState value, $Res Function(_MapViewState) then) =
       __$MapViewStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? serviceError, LocationData? currentLocation});
+  $Res call(
+      {String? serviceError,
+      LocationData? currentLocation,
+      PlaceInfo? placeInfoSelected,
+      List<LatLng> listLatLng});
 }
 
 /// @nodoc
@@ -97,6 +123,8 @@ class __$MapViewStateCopyWithImpl<$Res> extends _$MapViewStateCopyWithImpl<$Res>
   $Res call({
     Object? serviceError = freezed,
     Object? currentLocation = freezed,
+    Object? placeInfoSelected = freezed,
+    Object? listLatLng = freezed,
   }) {
     return _then(_MapViewState(
       serviceError: serviceError == freezed
@@ -107,6 +135,14 @@ class __$MapViewStateCopyWithImpl<$Res> extends _$MapViewStateCopyWithImpl<$Res>
           ? _value.currentLocation
           : currentLocation // ignore: cast_nullable_to_non_nullable
               as LocationData?,
+      placeInfoSelected: placeInfoSelected == freezed
+          ? _value.placeInfoSelected
+          : placeInfoSelected // ignore: cast_nullable_to_non_nullable
+              as PlaceInfo?,
+      listLatLng: listLatLng == freezed
+          ? _value.listLatLng
+          : listLatLng // ignore: cast_nullable_to_non_nullable
+              as List<LatLng>,
     ));
   }
 }
@@ -114,16 +150,25 @@ class __$MapViewStateCopyWithImpl<$Res> extends _$MapViewStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MapViewState implements _MapViewState {
-  _$_MapViewState({this.serviceError, this.currentLocation});
+  _$_MapViewState(
+      {this.serviceError,
+      this.currentLocation,
+      this.placeInfoSelected,
+      this.listLatLng = const <LatLng>[]});
 
   @override
   final String? serviceError;
   @override
   final LocationData? currentLocation;
+  @override
+  final PlaceInfo? placeInfoSelected;
+  @JsonKey()
+  @override
+  final List<LatLng> listLatLng;
 
   @override
   String toString() {
-    return 'MapViewState(serviceError: $serviceError, currentLocation: $currentLocation)';
+    return 'MapViewState(serviceError: $serviceError, currentLocation: $currentLocation, placeInfoSelected: $placeInfoSelected, listLatLng: $listLatLng)';
   }
 
   @override
@@ -134,14 +179,20 @@ class _$_MapViewState implements _MapViewState {
             const DeepCollectionEquality()
                 .equals(other.serviceError, serviceError) &&
             const DeepCollectionEquality()
-                .equals(other.currentLocation, currentLocation));
+                .equals(other.currentLocation, currentLocation) &&
+            const DeepCollectionEquality()
+                .equals(other.placeInfoSelected, placeInfoSelected) &&
+            const DeepCollectionEquality()
+                .equals(other.listLatLng, listLatLng));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(serviceError),
-      const DeepCollectionEquality().hash(currentLocation));
+      const DeepCollectionEquality().hash(currentLocation),
+      const DeepCollectionEquality().hash(placeInfoSelected),
+      const DeepCollectionEquality().hash(listLatLng));
 
   @JsonKey(ignore: true)
   @override
@@ -150,13 +201,20 @@ class _$_MapViewState implements _MapViewState {
 }
 
 abstract class _MapViewState implements MapViewState {
-  factory _MapViewState({String? serviceError, LocationData? currentLocation}) =
-      _$_MapViewState;
+  factory _MapViewState(
+      {String? serviceError,
+      LocationData? currentLocation,
+      PlaceInfo? placeInfoSelected,
+      List<LatLng> listLatLng}) = _$_MapViewState;
 
   @override
   String? get serviceError;
   @override
   LocationData? get currentLocation;
+  @override
+  PlaceInfo? get placeInfoSelected;
+  @override
+  List<LatLng> get listLatLng;
   @override
   @JsonKey(ignore: true)
   _$MapViewStateCopyWith<_MapViewState> get copyWith =>

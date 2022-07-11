@@ -68,9 +68,10 @@ class __BodyState extends State<_Body> {
           ),
           layers: [
             TileLayerOptions(
-              urlTemplate: AppConstants.urlMapTemplate,
-              subdomains: ['a', 'b', 'c'],
-              tileProvider: const NonCachingNetworkTileProvider(),
+              urlTemplate: AppConstants.urlMapBox,
+              additionalOptions: {
+                'access_token': AppConstants.accessTokenMapBox
+              },
             ),
             MarkerLayerOptions(
                 markers: _buildListMarker(widget.state)
@@ -78,7 +79,7 @@ class __BodyState extends State<_Body> {
           ],
           nonRotatedChildren: [
             AttributionWidget.defaultWidget(
-              source: 'OpenStreetMap',
+              source: 'Mapbox',
               onSourceTapped: () {},
             ),
           ],
@@ -136,21 +137,29 @@ class __BodyState extends State<_Body> {
 
   Marker _iconCurrentLocation(MapViewState state) {
     final currentLocation = state.currentLocation;
+
     if (currentLocation == null) {
       return Marker(
-          point: LatLng(0, 0), builder: (context) => const SizedBox());
+        point: LatLng(0, 0),
+        builder: (context) => const SizedBox(),
+      );
     }
-    final latLng =
-        LatLng(currentLocation.latitude ?? 0, currentLocation.longitude ?? 0);
+
+    final latLng = LatLng(
+      currentLocation.latitude ?? 0,
+      currentLocation.longitude ?? 0,
+    );
+
     return Marker(
-        point: latLng,
-        builder: (context) => CircleAvatar(
-              backgroundColor: Colors.blue.withOpacity(0.3),
-              child: const Icon(
-                Icons.person,
-                color: Colors.blue,
-              ),
-            ));
+      point: latLng,
+      builder: (context) => CircleAvatar(
+        backgroundColor: Colors.blue.withOpacity(0.3),
+        child: const Icon(
+          Icons.person,
+          color: Colors.blue,
+        ),
+      ),
+    );
   }
 
   List<Marker> _buildListMarker(MapViewState state) {
@@ -158,15 +167,17 @@ class __BodyState extends State<_Body> {
       return [];
     }
     final latLng = state.listLatLng.first;
+
     return [
       Marker(
-          point: latLng,
-          builder: (context) {
-            return const Icon(
-              Icons.location_on_sharp,
-              color: Colors.red,
-            );
-          }),
+        point: latLng,
+        builder: (context) {
+          return const Icon(
+            Icons.location_on_sharp,
+            color: Colors.red,
+          );
+        },
+      ),
     ];
   }
 
@@ -180,7 +191,7 @@ class __BodyState extends State<_Body> {
     if (isLocation) {
       return;
     }
-    Dialogs(context)
-        .showSimpleDialog('Không tìm thấy vị trí, vui lòng kiểm tra lại');
+    // Dialogs(context)
+    //     .showSimpleDialog('Không tìm thấy vị trí, vui lòng kiểm tra lại');
   }
 }
